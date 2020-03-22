@@ -18,8 +18,7 @@ $(document).on("click", ".Buttons", showHeroes);
 $(document).on("click", ".gifs", moveImages);
 
 function moveImages () {
-    var x = $(this);//.attr("data-state"));
-    alert (x);
+    console.log(this);
    if ($(this).attr("data-state") == "still") {
        $(this).html("<img src='" + $(this).attr("data-animate") + "'>");
        $(this).attr("data-state", "animate");
@@ -30,9 +29,8 @@ function moveImages () {
 };
 
 function showHeroes () 
-{   alert("inside showHeroes");
-    var heroes = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + heroes + " no api key for you :P";
+{   var heroes = $(this).attr("data-name");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + heroes + "";
     
     $.ajax({
             url: queryURL, 
@@ -47,18 +45,26 @@ function showHeroes ()
         {
             var gifDiv = $("<div>");
             gifDiv.addClass("gifDiv");
-            gifDiv.html("<p>Rating: " + response.data[i].rating.toUpperCase() + "</p>");
+           
+            
             var gifImage = $("<img src='" + response.data[i].images.fixed_height_still.url + "'>"); 
             gifImage.addClass("gif");
+            
             var imageDiv = $("<div>");
+            imageDiv.addClass("play");
             imageDiv.attr("data-state", "still");
             imageDiv.attr("data-name", heroes);
             imageDiv.attr("data-still", response.data[i].images.fixed_height_still.url);
             imageDiv.attr("data-animate", response.data[i].images.fixed_height.url);
     
+            var ratingDiv = $("<div>");
+            ratingDiv.addClass("gifDiv");
+            ratingDiv.html("<p>Rating: " + response.data[i].rating.toUpperCase() + "</p>");
+            
             $(imageDiv).append(gifImage);
-            $(imageDiv).append(gifDiv);
-            $(".gifs").append(imageDiv); 
+            $(gifDiv).append(imageDiv);
+            $(gifDiv).append(ratingDiv);
+            $(".gifs").append(gifDiv); 
 
         }
     }    );        
