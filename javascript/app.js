@@ -40,7 +40,7 @@ function moveImages () {
 
 function showHeroes () 
 {   var heroes = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + heroes + " ";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + heroes + "&api_key=JSsvBeCyV1awtmn7sFsiIefIT100fmQ1";
     
     $.ajax({
             url: queryURL, 
