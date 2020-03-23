@@ -1,7 +1,7 @@
 var heroes = ["Black Widow", "Peggy Carter", "Captain Marvel", "Hawkeye", "Captain America"];
 
-function showButtons()
-{   alert(heroes.length);
+function showButtons() {
+    $(".submit").empty();
     for (var i = 0; i < heroes.length; i++) 
     {
        var newButton = $("<button>");
@@ -9,20 +9,21 @@ function showButtons()
        newButton.attr("data-name", heroes[i]);
        newButton.text(heroes[i]);
        $(".submit").append(newButton);
-       alert ("new button");
     } 
 }; 
 
 function addHeroes () {
-    alert ("Adding heroes!");
+    event.preventDefault();
     heroes.push(newHero.value);
     showButtons();
+    newHero.value = " ";
+
 };
 
 
 showButtons();
 // on-click function here-after you create the buttons
-//$(document).on("click", ".Buttons", showHeroes);
+$(document).on("click", ".Buttons", showHeroes);
 $(document).on("click", ".play", moveImages);
 $(document).on("click", ".Bttn", addHeroes);
 
@@ -48,7 +49,7 @@ function showHeroes ()
           )
     .done(function(response) 
     {
-       // console.log(response);
+    console.log(response);
         $(".gifs").empty();
         for (var i = 0; i < response.data.length; i++) 
         {
